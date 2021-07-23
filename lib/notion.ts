@@ -9,9 +9,20 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-export const getDatabase = async (databaseId: string) => {
+export const getDatabase = async (
+  databaseId: string,
+  {
+    start_cursor,
+    page_size = 100,
+  }: {
+    start_cursor?: string;
+    page_size: number;
+  }
+) => {
   const response = await notion.databases.query({
     database_id: databaseId,
+    start_cursor: start_cursor,
+    page_size: page_size,
   });
   return response.results;
 };
@@ -25,18 +36,18 @@ export const getPage = async (pageId: string) => {
 
 export const getBlocks = async (
   blockId: string,
-  options: {
-    start_Cursor?: string;
+  {
+    start_cursor,
+    page_size = 50,
+  }: {
+    start_cursor?: string;
     page_size: number;
-  } = {
-    page_size: 50,
   }
 ) => {
-  const { start_Cursor, page_size } = options;
   const response = await notion.blocks.children.list({
     block_id: blockId,
     page_size: page_size,
-    start_cursor: start_Cursor,
+    start_cursor: start_cursor,
   });
   return response.results;
 };
