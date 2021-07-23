@@ -23,7 +23,6 @@ const indexPage = ({
   blocks,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const title = getTitleFromPage(page);
-  console.log(blocks);
   return (
     <div
       className={["container", "px-2"].join(" ").trim()}
