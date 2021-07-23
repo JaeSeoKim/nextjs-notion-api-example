@@ -1,0 +1,30 @@
+.mention {
+  @apply text-gray-400 inline-flex justify-center;
+
+  &::before {
+    content: "＠";
+  }
+  .avatar {
+    @apply w-0 overflow-hidden;
+  }
+  &:hover {
+    .avatar {
+      width: fit-content;
+    }
+  }
+}
+
+.database {
+  @apply text-gray-400 inline-flex justify-center;
+  &::before {
+    @apply mr-1;
+    content: "💿";
+  }
+}
+.page {
+  @apply text-gray-400 inline-flex justify-center;
+  &::before {
+    @apply mr-1;
+    content: "📄";
+  }
+}

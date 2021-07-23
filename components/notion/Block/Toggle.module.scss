@@ -1,0 +1,7 @@
+.toggle {
+  @apply my-1;
+
+  & > summary {
+    @apply cursor-pointer;
+  }
+}

@@ -1,0 +1,13 @@
+.toDo {
+  @apply my-1;
+}
+
+.toDo-checkbox {
+  & > input {
+    @apply mr-2 cursor-pointer;
+  }
+}
+
+.checked {
+  @apply text-gray-400 line-through;
+}

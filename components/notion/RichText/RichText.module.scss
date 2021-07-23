@@ -1,0 +1,79 @@
+.richtext {
+}
+
+.richtext-bold {
+  @apply font-bold;
+}
+.richtext-italic {
+  @apply italic;
+}
+.richtext-underline {
+  @apply underline;
+}
+.richtext-strikethrough {
+  @apply line-through;
+}
+.richtext-code {
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  background-color: rgb(238, 238, 238);
+  white-space: pre-line;
+}
+
+.richtext-default {
+}
+.richtext-gray {
+  @apply text-gray-400;
+}
+.richtext-brown {
+  @apply text-yellow-800;
+}
+.richtext-orange {
+  @apply text-yellow-600;
+}
+.richtext-yellow {
+  @apply text-yellow-300;
+}
+.richtext-green {
+  @apply text-green-600;
+}
+.richtext-blue {
+  @apply text-blue-600;
+}
+.richtext-purple {
+  @apply text-purple-600;
+}
+.richtext-pink {
+  @apply text-pink-500;
+}
+.richtext-red {
+  @apply text-red-600;
+}
+
+.richtext-gray_background {
+  @apply bg-gray-600;
+}
+.richtext-brown_background {
+  @apply bg-yellow-800;
+}
+.richtext-orange_background {
+  @apply bg-yellow-600;
+}
+.richtext-yellow_background {
+  @apply bg-yellow-300;
+}
+.richtext-green_background {
+  @apply bg-green-600;
+}
+.richtext-blue_background {
+  @apply bg-blue-600;
+}
+.richtext-purple_background {
+  @apply bg-purple-600;
+}
+.richtext-pink_background {
+  @apply bg-pink-500;
+}
+.richtext-red_background {
+  @apply bg-red-600;
+}
