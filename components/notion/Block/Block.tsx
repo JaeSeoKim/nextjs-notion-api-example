@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { Block as BlockType } from "@notionhq/client/build/src/api-types";
 import Paragraph from "./Paragraph";
 import HeadingOne from "./HeadingOne";

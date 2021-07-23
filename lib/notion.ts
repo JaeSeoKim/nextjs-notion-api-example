@@ -13,10 +13,12 @@ export const getDatabase = async (
   databaseId: string,
   {
     start_cursor,
-    page_size = 100,
+    page_size,
   }: {
     start_cursor?: string;
     page_size: number;
+  } = {
+    page_size: 50,
   }
 ) => {
   const response = await notion.databases.query({
@@ -38,10 +40,12 @@ export const getBlocks = async (
   blockId: string,
   {
     start_cursor,
-    page_size = 50,
+    page_size,
   }: {
     start_cursor?: string;
     page_size: number;
+  } = {
+    page_size: 50,
   }
 ) => {
   const response = await notion.blocks.children.list({

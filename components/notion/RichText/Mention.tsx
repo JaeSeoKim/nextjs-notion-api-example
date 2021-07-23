@@ -10,7 +10,6 @@ import React from "react";
 import Image from "next/image";
 import styles from "./Mention.module.scss";
 import dayjs from "dayjs";
-import { data } from "autoprefixer";
 
 interface UserMentionProps {
   mention: UserMentionType;
@@ -87,10 +86,7 @@ interface PageMentionProps {
 const PageMention: React.FC<PageMentionProps> = ({ mention }) => {
   const { page } = mention;
   return (
-    <span
-      className={[styles.page].join(" ").trim()}
-      title={`page-${page.id}`}
-    >
+    <span className={[styles.page].join(" ").trim()} title={`page-${page.id}`}>
       {page.id}
     </span>
   );
