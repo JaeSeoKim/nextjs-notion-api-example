@@ -1,6 +1,6 @@
 # Notion API ❤️ Next.js example!
 
-This repo was a collection of `React`, `Next.js` usage examples using `notion-api`.
+This is a collection of `React`, `Next.js` usage examples by `notion-api` written with `typescript`.
 
 I'm still writing various examples, so if you find a problem, please leave an issue!
 
