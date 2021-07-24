@@ -1,18 +1,24 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Block from "../components/notion/Block";
-import { getBlocks, getPage, getTitleFromPage } from "../lib/notion";
+import {
+  getBlocks,
+  getBlocksWithChildren,
+  getPage,
+  getTitleFromPage,
+} from "../lib/notion";
 
 export const getStaticProps = async (ctx: GetStaticPropsContext) => {
   if (typeof process.env.NOTION_INDEX_PAGE !== "string")
     throw new Error("Missing NOTION_INDEX_PAGE environment variable");
   const page = await getPage(process.env.NOTION_INDEX_PAGE);
   const blocks = await getBlocks(process.env.NOTION_INDEX_PAGE);
+  const blocksWithAllChildren = await getBlocksWithChildren(blocks);
 
   return {
     props: {
       page,
-      blocks,
+      blocks: blocksWithAllChildren,
     },
     revalidate: 60,
   };
@@ -40,7 +46,7 @@ const indexPage = ({
         </h1>
         <hr />
         {blocks.map((block) => (
-          <Block key={block.id} value={block} />
+          <Block key={`${block.id}`} value={block} />
         ))}
       </article>
     </div>
