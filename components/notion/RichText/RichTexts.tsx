@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Block as BlockType,
   RichText as RichTextType,
 } from "@notionhq/client/build/src/api-types";
 import RichText from "./";

@@ -10,8 +10,10 @@ export interface BulletedListItemProps {
 
 const BulletedListItem: React.FC<BulletedListItemProps> = ({ value }) => {
   return (
-    <li className={[styles.bulletedListItem].join("").trim()}>
-      <RichTexts value={value.bulleted_list_item.text} />
+    <>
+      <li className={[styles.bulletedListItem].join("").trim()}>
+        <RichTexts value={value.bulleted_list_item.text} />
+      </li>
       {value.bulleted_list_item.children && (
         <div className={["ml-4"].join(" ").trim()}>
           {value.bulleted_list_item.children.map((child) => {
@@ -21,7 +23,7 @@ const BulletedListItem: React.FC<BulletedListItemProps> = ({ value }) => {
           })}
         </div>
       )}
-    </li>
+    </>
   );
 };
 export default BulletedListItem;

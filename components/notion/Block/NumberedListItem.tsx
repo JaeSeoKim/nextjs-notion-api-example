@@ -10,8 +10,10 @@ export interface NumberedListItemProps {
 
 const NumberedListItem: React.FC<NumberedListItemProps> = ({ value }) => {
   return (
-    <li className={[styles.numberedListItem].join("").trim()}>
-      <RichTexts value={value.numbered_list_item.text} />
+    <>
+      <li className={[styles.numberedListItem].join("").trim()}>
+        <RichTexts value={value.numbered_list_item.text} />
+      </li>
       {value.numbered_list_item.children && (
         <div className={["ml-4"].join(" ").trim()}>
           {value.numbered_list_item.children.map((child) => {
@@ -21,7 +23,7 @@ const NumberedListItem: React.FC<NumberedListItemProps> = ({ value }) => {
           })}
         </div>
       )}
-    </li>
+    </>
   );
 };
 export default NumberedListItem;
