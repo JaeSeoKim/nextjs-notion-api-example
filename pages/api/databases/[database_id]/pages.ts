@@ -2,34 +2,33 @@ import {
   APIErrorCode,
   ClientErrorCode,
   isNotionClientError,
-  NotionClientError,
 } from "@notionhq/client";
 import { Page } from "@notionhq/client/build/src/api-types";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPage } from "../../../lib/notion";
+import { getDatabasePages } from "../../../../lib/notion";
 
-export type GetPagesResData = {
+export type GetDatabasesPagesResData = {
   error?: string;
-  page: Page | null;
+  pages: Page[] | null;
   code?: ClientErrorCode | APIErrorCode;
 };
 
 const getHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<GetPagesResData>
+  res: NextApiResponse<GetDatabasesPagesResData>
 ) => {
-  const { page_id } = req.query;
+  const { database_id } = req.query;
   try {
-    const page = await getPage(
-      typeof page_id === "string" ? page_id : page_id[0]
+    const pages = await getDatabasePages(
+      typeof database_id === "string" ? database_id : database_id[0]
     );
     res.status(200).json({
-      page: page,
+      pages: pages,
     });
   } catch (e: unknown) {
     if (isNotionClientError(e))
       res.status(500).json({
-        page: null,
+        pages: null,
         error: e.message,
         code: e.code,
       });

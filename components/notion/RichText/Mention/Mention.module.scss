@@ -1,11 +1,12 @@
-.mention {
+.mention,
+.date {
   @apply text-gray-500 inline-flex justify-center;
 
   &::before {
     content: "＠";
   }
   img {
-    @apply inline-flex mx-1 border rounded-full;
+    @apply inline-flex mx-1 rounded-full;
   }
 }
 
@@ -13,13 +14,13 @@
   @apply text-gray-500 inline-flex justify-center;
   &::before {
     @apply inline-block mr-1;
-    content: "💿 ↗️";
+    content: "💿";
   }
 }
 .page {
   @apply text-gray-500 inline-flex justify-center;
   &::before {
     @apply inline-block mr-1;
-    content: "📄 ↗️";
+    content: "📄";
   }
 }

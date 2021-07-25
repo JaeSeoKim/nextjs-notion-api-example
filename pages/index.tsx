@@ -1,6 +1,7 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Block from "../components/notion/Block";
+import classes from "../lib/classes";
 import {
   getBlocks,
   getBlocksWithChildren,
@@ -8,7 +9,7 @@ import {
   getTitleFromPage,
 } from "../lib/notion";
 
-export const getStaticProps = async (ctx: GetStaticPropsContext) => {
+export const getStaticProps = async (_ctx: GetStaticPropsContext) => {
   if (typeof process.env.NOTION_INDEX_PAGE !== "string")
     throw new Error("Missing NOTION_INDEX_PAGE environment variable");
   const page = await getPage(process.env.NOTION_INDEX_PAGE);
@@ -19,7 +20,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext) => {
       page,
       blocks: blocksWithAllChildren,
     },
-    revalidate: 60,
+    revalidate: 64,
   };
 };
 
@@ -30,21 +31,15 @@ const indexPage = ({
   const title = getTitleFromPage(page);
   return (
     <div
-      className={["container", "max-w-screen-md", "px-2"].join(" ").trim()}
-      style={{
-        marginLeft: "auto",
-        marginRight: "auto",
-      }}
+      className={classes(["container", "max-w-screen-md", "mx-auto", "px-2"])}
     >
       <Head>
         <title>{title}</title>
       </Head>
       <article>
-        <h1 className={["text-4xl", "py-3", "font-bold"].join(" ").trim()}>
-          {title}
-        </h1>
+        <h1 className={classes(["text-4xl", "py-3", "font-bold"])}>{title}</h1>
         <hr />
-        {blocks.map((block, index) => (
+        {blocks.map((block) => (
           <Block key={`${block.id}-${new Date()}`} value={block} />
         ))}
       </article>

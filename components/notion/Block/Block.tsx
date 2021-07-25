@@ -1,5 +1,6 @@
 import React from "react";
 import { Block as BlockType } from "@notionhq/client/build/src/api-types";
+import styles from "./Block.module.scss";
 import Paragraph from "./Paragraph";
 import HeadingOne from "./HeadingOne";
 import HeadingTwo from "./HeadingTwo";
@@ -17,28 +18,36 @@ interface BlockProps {
 const Block: React.FC<BlockProps> = ({ value }) => {
   switch (value.type) {
     case "paragraph":
-      return <Paragraph value={value} />;
+      return <Paragraph className={styles["notion-block"]} value={value} />;
     case "heading_1":
-      return <HeadingOne value={value} />;
+      return <HeadingOne className={styles["notion-block"]} value={value} />;
     case "heading_2":
-      return <HeadingTwo value={value} />;
+      return <HeadingTwo className={styles["notion-block"]} value={value} />;
     case "heading_3":
-      return <HeadingThree value={value} />;
+      return <HeadingThree className={styles["notion-block"]} value={value} />;
     case "bulleted_list_item":
-      return <BulletedListItem value={value} />;
+      return (
+        <BulletedListItem className={styles["notion-block"]} value={value} />
+      );
     case "numbered_list_item":
-      return <NumberedListItem value={value} />;
+      return (
+        <NumberedListItem className={styles["notion-block"]} value={value} />
+      );
     case "to_do":
-      return <ToDo value={value} />;
+      return <ToDo className={styles["notion-block"]} value={value} />;
     case "toggle":
-      return <Toggle value={value} />;
+      return <Toggle className={styles["notion-block"]} value={value} />;
     case "child_page":
-      return <ChildPage value={value} />;
+      return <ChildPage className={styles["notion-block"]} value={value} />;
     default:
       console.info(
         `ℹ️ Unsupported block (${value.type}) - https://developers.notion.com/reference/block`
       );
-      return <p className={"notion-block"}>ℹ️ Unsupported block ({value.type})</p>;
+      return (
+        <p className={styles["notion-block"]}>
+          ℹ️ Unsupported block ({value.type})
+        </p>
+      );
   }
 };
 

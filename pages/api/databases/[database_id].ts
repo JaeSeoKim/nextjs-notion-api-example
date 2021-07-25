@@ -2,13 +2,12 @@ import {
   APIErrorCode,
   ClientErrorCode,
   isNotionClientError,
-  NotionClientError,
 } from "@notionhq/client";
 import { Database } from "@notionhq/client/build/src/api-types";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getDatabaseInfo } from "../../../lib/notion";
+import { getDatabase } from "../../../lib/notion";
 
-export type databasesResData = {
+export type GetDatabasesResData = {
   error?: string;
   database: Database | null;
   code?: ClientErrorCode | APIErrorCode;
@@ -16,11 +15,11 @@ export type databasesResData = {
 
 const getHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<databasesResData>
+  res: NextApiResponse<GetDatabasesResData>
 ) => {
   const { database_id } = req.query;
   try {
-    const database = await getDatabaseInfo(
+    const database = await getDatabase(
       typeof database_id === "string" ? database_id : database_id[0]
     );
     res.status(200).json({

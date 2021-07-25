@@ -3,15 +3,17 @@ import { ToDoBlock } from "@notionhq/client/build/src/api-types";
 import { RichTexts } from "../RichText";
 import Block from ".";
 import styles from "./ToDo.module.scss";
+import classes from "../../../lib/classes";
 
 export interface ToDoProps {
   value: ToDoBlock;
+  className?: string;
 }
 
-const ToDo: React.FC<ToDoProps> = ({ value }) => {
+const ToDo: React.FC<ToDoProps> = ({ value, className }) => {
   return (
     <>
-      <p className={["notion-block", styles.toDo].join(" ").trim()}>
+      <p className={classes([className, , styles.toDo])}>
         <label
           className={[
             styles["toDo-checkbox"],
@@ -34,7 +36,7 @@ const ToDo: React.FC<ToDoProps> = ({ value }) => {
         </label>
       </p>
       {value.to_do.children && (
-        <div className={["ml-4"].join(" ").trim()}>
+        <div className={classes(["ml-4"])}>
           {value.to_do.children.map((child) => {
             return (
               <Block key={`${value.id}-child-${child.id}`} value={child} />

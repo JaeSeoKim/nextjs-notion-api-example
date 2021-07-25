@@ -4,6 +4,7 @@ import styles from "./RichText.module.scss";
 import Text from "./Text";
 import Equation from "./Equation";
 import Mention from "./Mention";
+import classes from "../../../lib/classes";
 
 export interface SwitchRichTextProps {
   value: RichTextType;
@@ -29,7 +30,7 @@ const RichText: React.FC<RichTextProps> = ({ value }) => {
 
   return (
     <span
-      className={[
+      className={classes([
         styles.richtext,
         styles[`richtext-${annotations.color}`],
         annotations.bold ? styles["richtext-bold"] : "",
@@ -37,9 +38,7 @@ const RichText: React.FC<RichTextProps> = ({ value }) => {
         annotations.underline ? styles["richtext-underline"] : "",
         annotations.strikethrough ? styles["richtext-strikethrough"] : "",
         annotations.code ? styles["richtext-code"] : "",
-      ]
-        .join(" ")
-        .trim()}
+      ])}
     >
       <SwitchRichText value={value} />
     </span>
