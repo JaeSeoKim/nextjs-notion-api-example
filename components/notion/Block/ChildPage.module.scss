@@ -1,5 +1,5 @@
 .childPage {
-  @apply my-1 text-gray-500 underline cursor-pointer;
+  @apply my-1 text-gray-500;
 
   &::before {
     @apply inline-block mr-1;

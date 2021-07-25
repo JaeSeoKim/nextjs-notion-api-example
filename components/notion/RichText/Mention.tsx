@@ -6,13 +6,15 @@ import {
   RichTextMention as RichTextMention,
   UserMention as UserMentionType,
 } from "@notionhq/client/build/src/api-types";
-import React from "react";
+import React, { Ref } from "react";
 import Image from "next/image";
 import styles from "./Mention.module.scss";
-import dayjs from "dayjs";
+import getRelativeTime from "../../../lib/getRelativeTime";
 import useRequest from "../../../lib/hooks/useRequest";
 import { getPagesResData } from "../../../pages/api/pages/[page_id]";
 import { getTitleFromPage } from "../../../lib/notion";
+import { databasesResData } from "../../../pages/api/databases/[database_id]";
+import dayjs from "dayjs";
 
 interface UserMentionProps {
   mention: UserMentionType;
@@ -58,12 +60,30 @@ interface DatabaseMentionProps {
 const DatabaseMention: React.FC<DatabaseMentionProps> = ({ mention }) => {
   const { database } = mention;
 
+  const { data, error } = useRequest<databasesResData>({
+    url: `/api/databases/${database.id}`,
+  });
+
+  if (error || data?.database === null) {
+    return <span className={styles.page}>requests fail: {database.id}</span>;
+  }
+
+  if (data === undefined) {
+    return (
+      <span
+        className={styles.database}
+        title={`loading-database-${database.id}`}
+      >
+        Loading 📡
+      </span>
+    );
+  }
+
+  const title = data.database.title.map((value) => value.plain_text).join("");
+
   return (
-    <span
-      className={[styles.database].join(" ").trim()}
-      title={`database-${database.id}`}
-    >
-      {database.id}
+    <span className={[styles.database].join(" ").trim()} title={title}>
+      {title}
     </span>
   );
 };
@@ -73,24 +93,26 @@ interface DateMentionProps {
 }
 
 const DateMention: React.FC<DateMentionProps> = ({ mention }) => {
-  const timeFormat = "YYYY MM/DD mm:ss";
+  const DateTimeFormat = "YYYY-MM-DD HH:mm";
   const { date } = mention as unknown as DatePropertyValue;
-  const startAt = dayjs(date.start).format(timeFormat);
+  const startAt = dayjs(date.start).format(DateTimeFormat);
+
   if (date.end) {
-    const endAt = dayjs(date.end).format(timeFormat);
+    const endAt = dayjs(date.end).format(DateTimeFormat);
 
     return (
       <span
         className={[styles.mention].join(" ").trim()}
-        title={`${startAt}-${endAt}`}
+        title={`${startAt} → ${endAt}`}
       >
-        {startAt} → {endAt}
+        {getRelativeTime(date.start)} → {getRelativeTime(date.end)}
       </span>
     );
   }
+
   return (
-    <span className={[styles.mention].join(" ").trim()} title={`${startAt}`}>
-      {startAt}
+    <span className={[styles.mention].join(" ").trim()} title={startAt}>
+      {getRelativeTime(date.start)}
     </span>
   );
 };
@@ -105,12 +127,16 @@ const PageMention: React.FC<PageMentionProps> = ({ mention }) => {
     url: `/api/pages/${page.id}`,
   });
 
-  if (error || data?.page === undefined) {
+  if (error || data?.page === null) {
     return <span className={styles.page}>requests fail: {page.id}</span>;
   }
 
   if (data === undefined) {
-    return <span className={styles.page}>loading...: {page.id}</span>;
+    return (
+      <span className={styles.page} title={`loading-page-${page.id}`}>
+        Loading 📡
+      </span>
+    );
   }
 
   const title = getTitleFromPage(data.page);

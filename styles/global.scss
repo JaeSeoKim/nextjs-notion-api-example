@@ -7,4 +7,11 @@
   &:hover {
     @apply bg-blue-100;
   }
+
+  a {
+    @apply underline cursor-pointer;
+    &:hover {
+      @apply no-underline;
+    }
+  }
 }

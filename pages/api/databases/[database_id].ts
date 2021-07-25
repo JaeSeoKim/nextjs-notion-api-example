@@ -4,32 +4,32 @@ import {
   isNotionClientError,
   NotionClientError,
 } from "@notionhq/client";
-import { Page } from "@notionhq/client/build/src/api-types";
+import { Database } from "@notionhq/client/build/src/api-types";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPage } from "../../../lib/notion";
+import { getDatabaseInfo } from "../../../lib/notion";
 
-export type getPagesResData = {
+export type databasesResData = {
   error?: string;
-  page: Page | null;
+  database: Database | null;
   code?: ClientErrorCode | APIErrorCode;
 };
 
 const getHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<getPagesResData>
+  res: NextApiResponse<databasesResData>
 ) => {
-  const { page_id } = req.query;
+  const { database_id } = req.query;
   try {
-    const page = await getPage(
-      typeof page_id === "string" ? page_id : page_id[0]
+    const database = await getDatabaseInfo(
+      typeof database_id === "string" ? database_id : database_id[0]
     );
     res.status(200).json({
-      page: page,
+      database: database,
     });
   } catch (e: unknown) {
     if (isNotionClientError(e))
       res.status(500).json({
-        page: null,
+        database: null,
         error: e.message,
         code: e.code,
       });
