@@ -10,7 +10,7 @@ export interface ParagraphProps {
 
 const Paragraph: React.FC<ParagraphProps> = ({ value }) => {
   return (
-    <p className={[styles.paragraph].join(" ").trim()}>
+    <p className={["notion-block", styles.paragraph].join(" ").trim()}>
       <RichTexts value={value.paragraph.text} />
       {value.paragraph.children && (
         <div className={["ml-4"].join(" ").trim()}>

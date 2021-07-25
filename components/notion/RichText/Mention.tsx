@@ -23,8 +23,9 @@ const UserMention: React.FC<UserMentionProps> = ({ mention }) => {
 
   return (
     <span className={[styles.mention].join(" ").trim()}>
+      {user.name ? user.name : user.id}
       {user.avatar_url && (
-        <span className={styles.avatar}>
+        <span>
           {/*
 
           ISSUES: https://github.com/vercel/next.js/pull/21475
@@ -46,7 +47,6 @@ const UserMention: React.FC<UserMentionProps> = ({ mention }) => {
           />
         </span>
       )}
-      {user.name ? user.name : user.id}
     </span>
   );
 };
@@ -105,7 +105,7 @@ const PageMention: React.FC<PageMentionProps> = ({ mention }) => {
     url: `/api/pages/${page.id}`,
   });
 
-  if (error) {
+  if (error || data?.page === undefined) {
     return <span className={styles.page}>requests fail: {page.id}</span>;
   }
 

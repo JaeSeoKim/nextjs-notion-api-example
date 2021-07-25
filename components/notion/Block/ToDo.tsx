@@ -10,27 +10,29 @@ export interface ToDoProps {
 
 const ToDo: React.FC<ToDoProps> = ({ value }) => {
   return (
-    <div className={[styles.toDo].join(" ").trim()}>
-      <label
-        className={[
-          styles["toDo-checkbox"],
-          value.to_do.checked ? styles.checked : "",
-        ]
-          .join(" ")
-          .trim()}
-        htmlFor={value.id}
-      >
-        <input
-          type="checkbox"
-          id={value.id}
-          onClick={(e) => {
-            e.preventDefault();
-            return false;
-          }}
-          defaultChecked={value.to_do.checked}
-        />
-        <RichTexts value={value.to_do.text} />
-      </label>
+    <>
+      <p className={["notion-block", styles.toDo].join(" ").trim()}>
+        <label
+          className={[
+            styles["toDo-checkbox"],
+            value.to_do.checked ? styles.checked : "",
+          ]
+            .join(" ")
+            .trim()}
+          htmlFor={value.id}
+        >
+          <input
+            type="checkbox"
+            id={value.id}
+            onClick={(e) => {
+              e.preventDefault();
+              return false;
+            }}
+            defaultChecked={value.to_do.checked}
+          />
+          <RichTexts value={value.to_do.text} />
+        </label>
+      </p>
       {value.to_do.children && (
         <div className={["ml-4"].join(" ").trim()}>
           {value.to_do.children.map((child) => {
@@ -40,7 +42,7 @@ const ToDo: React.FC<ToDoProps> = ({ value }) => {
           })}
         </div>
       )}
-    </div>
+    </>
   );
 };
 export default ToDo;

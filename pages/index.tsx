@@ -30,7 +30,7 @@ const indexPage = ({
   const title = getTitleFromPage(page);
   return (
     <div
-      className={["container", "px-2"].join(" ").trim()}
+      className={["container", "max-w-screen-md", "px-2"].join(" ").trim()}
       style={{
         marginLeft: "auto",
         marginRight: "auto",

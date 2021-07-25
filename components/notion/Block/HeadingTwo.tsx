@@ -9,7 +9,7 @@ export interface HeadingTwoProps {
 
 const HeadingTwo: React.FC<HeadingTwoProps> = ({ value }) => {
   return (
-    <h2 className={[styles.headingTwo].join(" ").trim()}>
+    <h2 className={["notion-block", styles.headingTwo].join(" ").trim()}>
       <RichTexts value={value.heading_2.text} />
     </h2>
   );

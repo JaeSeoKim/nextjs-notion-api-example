@@ -8,7 +8,7 @@ export interface ChildPageProps {
 
 const ChildPage: React.FC<ChildPageProps> = ({ value }) => {
   return (
-    <p className={[styles.childPage].join(" ").trim()}>
+    <p className={["notion-block", styles.childPage].join(" ").trim()}>
       {value.child_page.title}
     </p>
   );

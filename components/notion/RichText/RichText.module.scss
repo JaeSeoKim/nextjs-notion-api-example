@@ -1,4 +1,10 @@
 .richtext {
+  a {
+    @apply underline;
+    &:hover {
+      @apply no-underline;
+    }
+  }
 }
 
 .richtext-bold {
@@ -14,16 +20,18 @@
   @apply line-through;
 }
 .richtext-code {
-  padding: 0.1rem 0.25rem;
-  border-radius: 0.25rem;
+  @apply text-sm;
   background-color: rgb(238, 238, 238);
-  white-space: pre-line;
+  @apply py-px px-1 rounded;
+  @apply border-2;
+  border-color: rgb(238, 238, 238);
+  @apply whitespace-pre-line;
 }
 
 .richtext-default {
 }
 .richtext-gray {
-  @apply text-gray-400;
+  @apply text-gray-500;
 }
 .richtext-brown {
   @apply text-yellow-800;
@@ -51,7 +59,7 @@
 }
 
 .richtext-gray_background {
-  @apply bg-gray-600;
+  @apply bg-gray-500;
 }
 .richtext-brown_background {
   @apply bg-yellow-800;

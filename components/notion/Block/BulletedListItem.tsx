@@ -11,7 +11,7 @@ export interface BulletedListItemProps {
 const BulletedListItem: React.FC<BulletedListItemProps> = ({ value }) => {
   return (
     <>
-      <li className={[styles.bulletedListItem].join("").trim()}>
+      <li className={["notion-block", styles.bulletedListItem].join(" ").trim()}>
         <RichTexts value={value.bulleted_list_item.text} />
       </li>
       {value.bulleted_list_item.children && (

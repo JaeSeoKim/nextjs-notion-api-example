@@ -9,7 +9,7 @@ export interface HeadingOneProps {
 
 const HeadingOne: React.FC<HeadingOneProps> = ({ value }) => {
   return (
-    <h1 className={[styles.headingOne].join(" ").trim()}>
+    <h1 className={["notion-block", styles.headingOne].join(" ").trim()}>
       <RichTexts value={value.heading_1.text} />
     </h1>
   );

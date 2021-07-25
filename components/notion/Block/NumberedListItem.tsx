@@ -11,7 +11,7 @@ export interface NumberedListItemProps {
 const NumberedListItem: React.FC<NumberedListItemProps> = ({ value }) => {
   return (
     <>
-      <li className={[styles.numberedListItem].join("").trim()}>
+      <li className={["notion-block", styles.numberedListItem].join(" ").trim()}>
         <RichTexts value={value.numbered_list_item.text} />
       </li>
       {value.numbered_list_item.children && (

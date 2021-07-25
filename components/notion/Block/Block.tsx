@@ -38,7 +38,7 @@ const Block: React.FC<BlockProps> = ({ value }) => {
       console.info(
         `ℹ️ Unsupported block (${value.type}) - https://developers.notion.com/reference/block`
       );
-      return <p>ℹ️ Unsupported block ({value.type})</p>;
+      return <p className={"notion-block"}>ℹ️ Unsupported block ({value.type})</p>;
   }
 };
 

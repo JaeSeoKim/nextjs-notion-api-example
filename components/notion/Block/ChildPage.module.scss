@@ -1,8 +1,8 @@
 .childPage {
-  @apply my-1 text-gray-400 underline cursor-pointer;
+  @apply my-1 text-gray-500 underline cursor-pointer;
 
   &::before {
-    content: "📄";
-    @apply mr-1 no-underline;
+    @apply inline-block mr-1;
+    content: "📄 ↗️";
   }
 }

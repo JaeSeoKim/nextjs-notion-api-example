@@ -11,7 +11,7 @@ export interface ToggleProps {
 const Toggle: React.FC<ToggleProps> = ({ value }) => {
   return (
     <details className={[styles.toggle].join(" ").trim()}>
-      <summary>
+      <summary className={"notion-block"}>
         <RichTexts value={value.toggle.text} />
       </summary>
       {value.toggle.children && (

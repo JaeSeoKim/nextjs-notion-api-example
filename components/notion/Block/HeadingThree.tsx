@@ -9,7 +9,7 @@ export interface HeadingThreeProps {
 
 const HeadingThree: React.FC<HeadingThreeProps> = ({ value }) => {
   return (
-    <h3 className={[styles.headingThree].join(" ").trim()}>
+    <h3 className={["notion-block", styles.headingThree].join(" ").trim()}>
       <RichTexts value={value.heading_3.text} />
     </h3>
   );
