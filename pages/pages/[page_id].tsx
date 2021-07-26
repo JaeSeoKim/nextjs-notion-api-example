@@ -26,7 +26,7 @@ export const getStaticProps = async (
 
   try {
     const page = await getPage(page_id);
-    const blocks = await getAllBlocks(process.env.NOTION_INDEX_PAGE);
+    const blocks = await getAllBlocks(page_id);
     const blocksWithAllChildren = await getBlocksWithChildren(blocks);
     return {
       props: {
