@@ -17,7 +17,10 @@ const getDatabasePages = async (
     start_cursor: start_cursor,
     page_size: page_size,
   });
-  return response.results;
+  return {
+    pages: response.results,
+    next_cursor: response.next_cursor,
+  };
 };
 
 export default getDatabasePages;

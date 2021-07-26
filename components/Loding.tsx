@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../../lib/classes";
+import classes from "../lib/classes";
 
 export interface LodingProps {
   className?: string;

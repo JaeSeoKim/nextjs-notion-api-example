@@ -19,12 +19,17 @@ const DatabaseMention: React.FC<DatabaseMentionProps> = ({
   });
 
   if (error || data?.database === null) {
-    return <span className={classes([className])}>requests fail: {database.id}</span>;
+    return (
+      <span className={classes([className])}>requests fail: {database.id}</span>
+    );
   }
 
   if (data === undefined) {
     return (
-      <span className={classes([className])} title={`loading-database-${database.id}`}>
+      <span
+        className={classes([className])}
+        title={`loading-database-${database.id}`}
+      >
         Loading 📡
       </span>
     );
@@ -33,7 +38,7 @@ const DatabaseMention: React.FC<DatabaseMentionProps> = ({
   const title = data.database.title.map((value) => value.plain_text).join("");
 
   return (
-    <span className={[classes([className])].join(" ").trim()} title={title}>
+    <span className={classes([className])} title={title}>
       {title}
     </span>
   );

@@ -3,7 +3,7 @@ import Head from "next/head";
 import Block from "../components/notion/Block";
 import classes from "../lib/classes";
 import {
-  getBlocks,
+  getAllBlocks,
   getBlocksWithChildren,
   getPage,
   getTitleFromPage,
@@ -13,7 +13,7 @@ export const getStaticProps = async (_ctx: GetStaticPropsContext) => {
   if (typeof process.env.NOTION_INDEX_PAGE !== "string")
     throw new Error("Missing NOTION_INDEX_PAGE environment variable");
   const page = await getPage(process.env.NOTION_INDEX_PAGE);
-  const blocks = await getBlocks(process.env.NOTION_INDEX_PAGE);
+  const blocks = await getAllBlocks(process.env.NOTION_INDEX_PAGE);
   const blocksWithAllChildren = await getBlocksWithChildren(blocks);
   return {
     props: {

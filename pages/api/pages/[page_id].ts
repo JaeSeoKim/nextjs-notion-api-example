@@ -2,7 +2,6 @@ import {
   APIErrorCode,
   ClientErrorCode,
   isNotionClientError,
-  NotionClientError,
 } from "@notionhq/client";
 import { Page } from "@notionhq/client/build/src/api-types";
 import type { NextApiRequest, NextApiResponse } from "next";

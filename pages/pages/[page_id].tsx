@@ -1,18 +1,17 @@
-import { PagesRetrieveResponse } from "@notionhq/client/build/src/api-endpoints";
-
 import { GetStaticPropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Block from "../../components/notion/Block";
 import { Block as BlockType } from "@notionhq/client/build/src/api-types";
+import { PagesRetrieveResponse } from "@notionhq/client/build/src/api-endpoints";
 import classes from "../../lib/classes";
 import {
-  getBlocks,
+  getAllBlocks,
   getBlocksWithChildren,
   getPage,
   getTitleFromPage,
 } from "../../lib/notion";
-import Loading from "../../components/Loding/Loding";
+import Loading from "../../components/Loding";
 
 export const getStaticPaths = async () => {
   return { paths: [], fallback: true };
@@ -27,7 +26,7 @@ export const getStaticProps = async (
 
   try {
     const page = await getPage(page_id);
-    const blocks = await getBlocks(page_id);
+    const blocks = await getAllBlocks(process.env.NOTION_INDEX_PAGE);
     const blocksWithAllChildren = await getBlocksWithChildren(blocks);
     return {
       props: {

@@ -11,24 +11,35 @@ export type GetDatabasesPagesResData = {
   error?: string;
   pages: Page[] | null;
   code?: ClientErrorCode | APIErrorCode;
+  next_cursor: string | null;
+};
+
+export type GetDatabasesPagesReqData = {
+  database_id: string;
+  start_cursor?: string;
+  page_size?: string;
 };
 
 const getHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<GetDatabasesPagesResData>
 ) => {
-  const { database_id } = req.query;
+  const { database_id, start_cursor, page_size } =
+    req.query as unknown as GetDatabasesPagesReqData;
   try {
-    const pages = await getDatabasePages(
-      typeof database_id === "string" ? database_id : database_id[0]
-    );
+    const { pages, next_cursor } = await getDatabasePages(database_id, {
+      start_cursor,
+      page_size: Number(page_size) || 50,
+    });
     res.status(200).json({
       pages: pages,
+      next_cursor: next_cursor,
     });
   } catch (e: unknown) {
     if (isNotionClientError(e))
       res.status(500).json({
         pages: null,
+        next_cursor: null,
         error: e.message,
         code: e.code,
       });

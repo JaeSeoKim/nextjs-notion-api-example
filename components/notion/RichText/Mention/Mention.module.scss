@@ -1,24 +1,26 @@
 .mention,
 .date {
-  @apply text-gray-500 inline-flex justify-center;
+  @apply text-gray-500 inline-block justify-center;
 
   &::before {
     content: "＠";
   }
   img {
-    @apply inline-flex mx-1 rounded-full;
+    @apply inline-block mx-1 rounded-full;
   }
 }
 
 .database {
-  @apply text-gray-500 inline-flex justify-center;
+  @apply inline-block justify-center;
+
   &::before {
     @apply inline-block mr-1;
     content: "💿";
   }
 }
+
 .page {
-  @apply text-gray-500 inline-flex justify-center;
+  @apply inline-block justify-center;
   &::before {
     @apply inline-block mr-1;
     content: "📄";

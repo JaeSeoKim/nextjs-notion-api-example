@@ -38,7 +38,7 @@ const PageMention: React.FC<PageMentionProps> = ({ mention, className }) => {
 
   return (
     <Link href={`/pages/${page.id}`}>
-      <a className={[classes([className])].join(" ").trim()} title={title}>
+      <a className={classes([className])} title={title}>
         {title}
       </a>
     </Link>

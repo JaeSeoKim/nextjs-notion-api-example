@@ -1,10 +1,11 @@
 import { Block } from "@notionhq/client/build/src/api-types";
-import getBlocks from "./getBlocks";
+import getAllBlocks from "./getAllBlocks";
 import getBlocksWithChildren from "./getBlocksWithChildren";
 
 const getBlockWithChildren = async (block: Block) => {
   if (block.has_children === true) {
-    const children = await getBlocks(block.id);
+    const children = await getAllBlocks(block.id);
+
     switch (block.type) {
       case "paragraph":
         if (typeof block.paragraph.children === "undefined") {
