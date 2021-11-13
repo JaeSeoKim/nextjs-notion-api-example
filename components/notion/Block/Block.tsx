@@ -1,5 +1,5 @@
 import React from "react";
-import { Block as BlockType } from "@notionhq/client/build/src/api-types";
+import { GetBlockResponse as BlockType } from "@notionhq/client/build/src/api-endpoints";
 import styles from "./Block.module.scss";
 import Paragraph from "./Paragraph";
 import HeadingOne from "./HeadingOne";
@@ -7,15 +7,16 @@ import HeadingTwo from "./HeadingTwo";
 import HeadingThree from "./HeadingThree";
 import BulletedListItem from "./BulletedListItem";
 import NumberedListItem from "./NumberedListItem";
+import ImageBlock from "./Image";
 import ToDo from "./ToDo";
 import Toggle from "./Toggle";
 import ChildPage from "./ChildPage";
-
 interface BlockProps {
   value: BlockType;
 }
 
 const Block: React.FC<BlockProps> = ({ value }) => {
+  console.log(value);
   switch (value.type) {
     case "paragraph":
       return <Paragraph className={styles["notion-block"]} value={value} />;
@@ -39,6 +40,8 @@ const Block: React.FC<BlockProps> = ({ value }) => {
       return <Toggle className={styles["notion-block"]} value={value} />;
     case "child_page":
       return <ChildPage className={styles["notion-block"]} value={value} />;
+    case "image":
+      return <ImageBlock className={styles["notion-block"]} value={value} />;
     default:
       console.info(
         `ℹ️ Unsupported block (${value.type}) - https://developers.notion.com/reference/block`

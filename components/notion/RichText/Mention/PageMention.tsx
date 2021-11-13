@@ -1,12 +1,20 @@
-import { PageMention as PageMentionType } from "@notionhq/client/build/src/api-types";
+import { GetPagePropertyResponse } from "@notionhq/client/build/src/api-endpoints";
 import Link from "next/link";
 import classes from "../../../../lib/classes";
 import useRequest from "../../../../lib/hooks/useRequest";
 import { getTitleFromPage } from "../../../../lib/notion";
 import { GetPagesResData } from "../../../../pages/api/pages/[page_id]";
 
+type RichTextOf<T> = T extends { type: "rich_text" } ? T : never;
+type RichText = RichTextOf<GetPagePropertyResponse>;
+type RichTextMentionOf<T> = T extends { type: "mention" } ? T : never;
+type RichTextMention = RichTextMentionOf<RichText["rich_text"]>;
+type RichTextMentionPageOf<T> = T extends { type: "page" } ? T : never;
+type RichTextMentionPage = RichTextMentionPageOf<
+  RichTextMention["mention"]
+>;
 interface PageMentionProps {
-  mention: PageMentionType;
+  mention: RichTextMentionPage;
   className?: string;
 }
 

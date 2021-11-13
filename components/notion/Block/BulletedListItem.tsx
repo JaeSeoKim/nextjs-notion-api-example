@@ -1,9 +1,15 @@
 import React from "react";
-import { BulletedListItemBlock } from "@notionhq/client/build/src/api-types";
+import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import { RichTexts } from "../RichText";
 import Block from ".";
 import styles from "./BulletedListItem.module.scss";
 import classes from "../../../lib/classes";
+
+type BulletedListItemBlockOf<T> = T extends { type: "bulleted_list_item" }
+  ? T
+  : never;
+
+type BulletedListItemBlock = BulletedListItemBlockOf<GetBlockResponse>;
 
 export interface BulletedListItemProps {
   value: BulletedListItemBlock;
@@ -14,12 +20,14 @@ const BulletedListItem: React.FC<BulletedListItemProps> = ({
   value,
   className,
 }) => {
+  const { bulleted_list_item } = value;
   return (
     <>
       <li className={classes([className, styles.bulletedListItem])}>
-        <RichTexts value={value.bulleted_list_item.text} />
+        <RichTexts value={bulleted_list_item.text} />
       </li>
-      {value.bulleted_list_item.children && (
+      {/* children 이 타입에 없습니다. */}
+      {/* {bulleted_list_item.children && (
         <div className={classes(["ml-4"])}>
           {value.bulleted_list_item.children.map((child) => {
             return (
@@ -27,7 +35,7 @@ const BulletedListItem: React.FC<BulletedListItemProps> = ({
             );
           })}
         </div>
-      )}
+      )} */}
     </>
   );
 };

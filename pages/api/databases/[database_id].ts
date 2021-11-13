@@ -3,13 +3,13 @@ import {
   ClientErrorCode,
   isNotionClientError,
 } from "@notionhq/client";
-import { Database } from "@notionhq/client/build/src/api-types";
+import { GetDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../lib/notion";
 
 export type GetDatabasesResData = {
   error?: string;
-  database: Database | null;
+  database: GetDatabaseResponse | null;
   code?: ClientErrorCode | APIErrorCode;
 };
 

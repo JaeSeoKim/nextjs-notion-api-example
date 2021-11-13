@@ -3,13 +3,13 @@ import {
   ClientErrorCode,
   isNotionClientError,
 } from "@notionhq/client";
-import { Page } from "@notionhq/client/build/src/api-types";
+import { GetPageResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDatabasePages } from "../../../../lib/notion";
 
 export type GetDatabasesPagesResData = {
   error?: string;
-  pages: Page[] | null;
+  pages: GetPageResponse[] | null;
   code?: ClientErrorCode | APIErrorCode;
   next_cursor: string | null;
 };

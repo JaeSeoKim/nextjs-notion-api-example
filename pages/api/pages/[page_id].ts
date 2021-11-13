@@ -3,7 +3,7 @@ import {
   ClientErrorCode,
   isNotionClientError,
 } from "@notionhq/client";
-import { Page } from "@notionhq/client/build/src/api-types";
+import { Page } from "@notionhq/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getPage } from "../../../lib/notion";
 

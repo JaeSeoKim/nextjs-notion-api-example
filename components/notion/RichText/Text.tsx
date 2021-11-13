@@ -1,5 +1,11 @@
-import { RichTextText } from "@notionhq/client/build/src/api-types";
+import { GetPagePropertyResponse } from "@notionhq/client/build/src/api-endpoints";
 import React from "react";
+
+type RichTextOf<T> = T extends { type: "rich_text" } ? T : never;
+
+type RichText = RichTextOf<GetPagePropertyResponse>;
+type RichTextTextOf<T> = T extends { type: "text" } ? T : never;
+type RichTextText = RichTextTextOf<RichText["rich_text"]>;
 
 export interface TextProps {
   value: RichTextText;

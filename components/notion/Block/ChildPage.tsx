@@ -1,7 +1,11 @@
 import React from "react";
-import { ChildPageBlock } from "@notionhq/client/build/src/api-types";
+import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import styles from "./ChildPage.module.scss";
 import classes from "../../../lib/classes";
+
+type ChildPageBlockOf<T> = T extends { type: "child_page" } ? T : never;
+
+type ChildPageBlock = ChildPageBlockOf<GetBlockResponse>;
 
 export interface ChildPageProps {
   value: ChildPageBlock;

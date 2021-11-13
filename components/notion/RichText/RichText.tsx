@@ -1,11 +1,15 @@
 import React from "react";
-import { RichText as RichTextType } from "@notionhq/client/build/src/api-types";
+import { GetPagePropertyResponse } from "@notionhq/client/build/src/api-endpoints";
 import styles from "./RichText.module.scss";
 import Text from "./Text";
 import Equation from "./Equation";
 import Mention from "./Mention";
 import classes from "../../../lib/classes";
 
+type RichTextOf<T> = T extends { type: "rich_text" } ? T : never;
+
+type RichText = RichTextOf<GetPagePropertyResponse>;
+type RichTextType = RichText["rich_text"]
 export interface SwitchRichTextProps {
   value: RichTextType;
 }

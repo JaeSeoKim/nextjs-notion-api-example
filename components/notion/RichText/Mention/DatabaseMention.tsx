@@ -1,10 +1,22 @@
-import { DatabaseMention as DatabaseMentionType } from "@notionhq/client/build/src/api-types";
+import { GetPagePropertyResponse } from "@notionhq/client/build/src/api-endpoints";
 import classes from "../../../../lib/classes";
 import useRequest from "../../../../lib/hooks/useRequest";
 import { GetDatabasesResData } from "../../../../pages/api/databases/[database_id]";
 
+// type DatabaseMentionType = GetDatabaseResponse["properties"];
+
+type RichTextOf<T> = T extends { type: "rich_text" } ? T : never;
+
+type RichText = RichTextOf<GetPagePropertyResponse>;
+type RichTextMentionOf<T> = T extends { type: "mention" } ? T : never;
+type RichTextMention = RichTextMentionOf<RichText["rich_text"]>;
+type RichTextMentionDatabaseOf<T> = T extends { type: "database" } ? T : never;
+type RichTextMentionDatabase = RichTextMentionDatabaseOf<
+  RichTextMention["mention"]
+>;
+
 interface DatabaseMentionProps {
-  mention: DatabaseMentionType;
+  mention: RichTextMentionDatabase;
   className?: string;
 }
 

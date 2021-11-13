@@ -1,4 +1,4 @@
-import { RichTextMention as RichTextMention } from "@notionhq/client/build/src/api-types";
+import { GetPagePropertyResponse } from "@notionhq/client/build/src/api-endpoints";
 import React from "react";
 import styles from "./Mention.module.scss";
 import UserMention from "./UserMention";
@@ -6,6 +6,11 @@ import DatabaseMention from "./DatabaseMention";
 import PageMention from "./PageMention";
 import DateMention from "./DateMention";
 
+type RichTextOf<T> = T extends { type: "rich_text" } ? T : never;
+
+type RichText = RichTextOf<GetPagePropertyResponse>;
+type RichTextMentionOf<T> = T extends { type: "mention" } ? T : never;
+type RichTextMention = RichTextMentionOf<RichText["rich_text"]>;
 export interface MentionProps {
   value: RichTextMention;
 }

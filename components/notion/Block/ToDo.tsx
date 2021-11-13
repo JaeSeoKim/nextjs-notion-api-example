@@ -1,10 +1,13 @@
 import React from "react";
-import { ToDoBlock } from "@notionhq/client/build/src/api-types";
+import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import { RichTexts } from "../RichText";
 import Block from ".";
 import styles from "./ToDo.module.scss";
 import classes from "../../../lib/classes";
 
+type ToDoBlockOf<T> = T extends { type: "to_do" } ? T : never;
+
+type ToDoBlock = ToDoBlockOf<GetBlockResponse>;
 export interface ToDoProps {
   value: ToDoBlock;
   className?: string;
@@ -35,7 +38,8 @@ const ToDo: React.FC<ToDoProps> = ({ value, className }) => {
           <RichTexts value={value.to_do.text} />
         </label>
       </p>
-      {value.to_do.children && (
+      {/* children 이 타입에 없습니다. */}
+      {/* {value.to_do.children && (
         <div className={classes(["ml-4"])}>
           {value.to_do.children.map((child) => {
             return (
@@ -43,7 +47,7 @@ const ToDo: React.FC<ToDoProps> = ({ value, className }) => {
             );
           })}
         </div>
-      )}
+      )} */}
     </>
   );
 };

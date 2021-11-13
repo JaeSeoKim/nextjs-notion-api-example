@@ -2,8 +2,8 @@ import { GetStaticPropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Block from "../../components/notion/Block";
-import { Block as BlockType } from "@notionhq/client/build/src/api-types";
-import { PagesRetrieveResponse } from "@notionhq/client/build/src/api-endpoints";
+import { GetBlockResponse as BlockType } from "@notionhq/client/build/src/api-endpoints";
+import { GetPagePropertyResponse } from "@notionhq/client/build/src/api-endpoints";
 import classes from "../../lib/classes";
 import {
   getAllBlocks,
@@ -46,7 +46,7 @@ const PageByIdPage = ({
   page,
   blocks,
 }: {
-  page: PagesRetrieveResponse;
+  page: GetPagePropertyResponse;
   blocks: BlockType[];
 }) => {
   const { isFallback } = useRouter();

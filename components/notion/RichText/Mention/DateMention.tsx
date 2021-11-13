@@ -1,18 +1,23 @@
-import {
-  DateMention as DateMentionType,
-  DatePropertyValue,
-} from "@notionhq/client/build/src/api-types";
+import { GetPagePropertyResponse } from "@notionhq/client/build/src/api-endpoints";
 import classes from "../../../../lib/classes";
 import getFormatTime from "../../../../lib/getFormatTime";
 import getRelativeTime from "../../../../lib/getRelativeTime";
 
+type RichTextOf<T> = T extends { type: "rich_text" } ? T : never;
+
+type RichText = RichTextOf<GetPagePropertyResponse>;
+type RichTextMentionOf<T> = T extends { type: "mention" } ? T : never;
+type RichTextMention = RichTextMentionOf<RichText["rich_text"]>;
+type RichTextMentionDateOf<T> = T extends { type: "date" } ? T : never;
+type RichTextMentionDate = RichTextMentionDateOf<RichTextMention["mention"]>;
+
 interface DateMentionProps {
-  mention: DateMentionType;
+  mention: RichTextMentionDate;
   className?: string;
 }
 
 const DateMention: React.FC<DateMentionProps> = ({ mention, className }) => {
-  const { date } = mention as unknown as DatePropertyValue;
+  const { date } = mention;
   const startAt = getFormatTime(date.start);
 
   if (date.end) {
